@@ -1,0 +1,136 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage{titling}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\bfseries,
+    showstringspaces=false,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+}
+
+\title{\textbf{AI Prompt Practice Worksheet}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\begin{mdframed}
+The following homework outlines tasks that you would need to complete in Python computing projects. The tasks themselves may be generic enough to allow for multiple potential solutions. The goal is to provide enough information in your prompt for an AI agent to complete the task.
+
+\medskip
+\noindent\textbf{Evaluation Criteria:}
+\begin{enumerate}[leftmargin=*, label=\arabic*.]
+    \item \textbf{Sequential Reasoning:} Break down the prompt's task into logical steps. For each step, identify key actions or decisions to be made. Use sequential reasoning to guide the AI.
+
+    \item \textbf{Contextual Awareness:} Ensure the prompt uses specific language and contextual clues that are relevant to the task. Highlight any gaps in information that may hinder the model's performance.
+    
+     \item \textbf{Language Awareness:} Use your knowledge of python to provide concrete suggestions on which features of python should be used.  This can be in natural language.  For example: use a loop to iterate through the keys in a dictionary and print out the first key that starts with x.
+\end{enumerate}
+\end{mdframed}
+
+\bigskip
+
+\begin{mdframed}[backgroundcolor=gray!15]
+\noindent\textbf{Example:} Create a python project
+
+\medskip
+\noindent\textbf{Example Response:} Create a python project using uv (on system PATH) called sample-project, add dependency requests, a src folder with a main.py. Add pytest as a dev dependency and create a folder called tests to hold the test code. Add ruff as a linter and ty as a type checker.
+\end{mdframed}
+
+\bigskip
+\noindent\textbf{Questions:}
+\begin{enumerate}[leftmargin=*, label=\arabic*., itemsep=2em]
+
+    \item The lead engineer on your team has suggested using the following library to build a GUI for your latest AI agent: \href{https://pypi.org/project/PyQt6/}{https://pypi.org/project/PyQt6/} \textbf{Evaluate this library suggestion and, if approved, add it to your project.}
+
+    \vspace{1.5em}
+    \noindent\rule{\linewidth}{0.4pt}
+
+    \item There exists a nested dictionary structured as follows: the top-level key is \texttt{data}, whose value is a list of dictionaries. Each dictionary has the attributes \texttt{response} (the response body) and \texttt{responseCode} (an HTTP status code). \textbf{Write a loop that iterates through each object in \texttt{data} and collects the non-2xx \texttt{responseCode} values into a list.}
+
+    \smallskip
+    \noindent\textit{Background:} HTTP response codes in the \textbf{2xx range} (e.g.\ 200, 201, 204) indicate a successful request. Codes outside this range — such as 4xx (client errors) or 5xx (server errors) — indicate a problem.
+
+    \smallskip
+    \noindent\textit{Example data structure:}
+
+    \begin{lstlisting}
+{
+    "data": [
+        {"response": "OK",           "responseCode": 200},
+        {"response": "Created",      "responseCode": 201},
+        {"response": "Not Found",    "responseCode": 404},
+        {"response": "Server Error", "responseCode": 500}
+    ]
+}
+    \end{lstlisting}
+
+    \vspace{1.5em}
+    \noindent\rule{\linewidth}{0.4pt}
+
+    \item \begin{enumerate}[label=(\alph*), itemsep=1.5em]
+
+        \item Given a list of items, \textbf{print every third item.}
+
+        \begin{lstlisting}
+items = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+        \end{lstlisting}
+
+        \noindent\textbf{Expected output:}
+        \begin{lstlisting}
+30
+60
+90
+        \end{lstlisting}
+
+        \vspace{1em}
+        \noindent\rule{\linewidth}{0.4pt}
+
+        \item An AI provided code to print every third item from the list above, but when you test it using the same list the output is:
+
+        \begin{lstlisting}
+40
+70
+        \end{lstlisting}
+
+        \noindent \textbf{Debug.}
+
+        \vspace{1em}
+        \noindent\rule{\linewidth}{0.4pt}
+
+    \end{enumerate}
+
+    \item The following code is intended to remove all even numbers from a list, but produces unexpected output. There is a bug in this code. \textbf{Debug.}
+
+    \smallskip
+    \noindent\textit{Background:} The modulo operator (\texttt{\%}) returns the remainder of a division. So \texttt{num \% 2 == 0} is true when a number divides evenly by 2, meaning it is even.
+
+    \begin{lstlisting}
+nums = [2, 4, 6, 8]
+for num in nums:
+    if num % 2 == 0:
+        nums.remove(num)
+print(nums)
+    \end{lstlisting}
+
+    \noindent\textbf{Output:} \texttt{[4, 8]}
+
+    \vspace{1.5em}
+    \noindent\rule{\linewidth}{0.4pt}
+
+\end{enumerate}
+
+\end{document}

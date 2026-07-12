@@ -1,0 +1,7 @@
+#latex trash
+*.log
+*.aux
+*.out
+
+# mac trash
+**/.DS_Store

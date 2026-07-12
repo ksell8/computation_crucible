@@ -1,0 +1,397 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+% ---------- Colors ----------
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codekeyword}{RGB}{0,90,150}
+\definecolor{codestring}{RGB}{140,20,20}
+\definecolor{codecomment}{RGB}{100,100,100}
+
+% ---------- Code listing style (Python) ----------
+\lstdefinestyle{pystyle}{
+    language=Python,
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{codekeyword}\bfseries,
+    stringstyle=\color{codestring},
+    commentstyle=\color{codecomment}\itshape,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{gray!40},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    xleftmargin=1.8em,
+    framexleftmargin=1.5em,
+    tabsize=4,
+}
+\lstset{style=pystyle}
+
+% ---------- Header/Footer ----------
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\lhead{Control Flow: Predict the Output}
+\rhead{Name: \underline{\hspace{4cm}}}
+\cfoot{\thepage}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+
+\newcommand{\answerbox}{%
+\vspace{2mm}
+\noindent\textbf{Output:}
+\vspace{14mm}
+}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{Control Flow Detective}}\\[2mm]
+    {\normalsize Read each piece of code carefully. Do NOT run it in your head too fast --- trace through it
+    line by line, just like the computer would. Write down exactly what would be printed to the console.}
+\end{center}
+
+\vspace{4mm}
+\noindent\textbf{Directions:} For each problem, write the exact output, including spacing, capitalization,
+and line breaks. If nothing is printed, write \texttt{(nothing)}. If the code would cause an error,
+write \texttt{ERROR} and explain why in one sentence.
+
+\vspace{4mm}
+\hrule
+\vspace{4mm}
+
+\noindent\textbf{Worked Example} \quad (this one is done for you --- study how the tracing works!)
+
+\begin{lstlisting}
+x = 3
+if x > 5:
+    print("big")
+else:
+    print("small")
+print("done")
+\end{lstlisting}
+
+\noindent\textit{How to trace it:}
+\begin{enumerate}[nosep]
+    \item \texttt{x} is set to \texttt{3}.
+    \item Check the condition: is \texttt{3 > 5}? No, that's false.
+    \item Since the \texttt{if} was false, we jump to the \texttt{else} block and run \texttt{print("small")}.
+    \item The \texttt{if}/\texttt{else} is finished, so we move to the next line, \texttt{print("done")}, which always runs no matter which branch we took.
+\end{enumerate}
+
+\noindent\textbf{Output:}
+\begin{lstlisting}[frame=none,numbers=none,backgroundcolor=\color{white}]
+small
+done
+\end{lstlisting}
+
+\vspace{4mm}
+\hrule
+
+\vspace{2mm}
+
+\vspace{4mm}
+\hrule
+\vspace{2mm}
+
+\noindent\textbf{Quick reminders:}
+\vspace{2mm}
+
+\begin{itemize}[nosep]
+    \item \texttt{\%} is the \textbf{modulo} operator --- it gives you the \textit{remainder} after
+    dividing. For example, \texttt{7 \% 2} is \texttt{1} (7 divided by 2 is 3 with 1 left over), and
+    \texttt{10 \% 5} is \texttt{0} (10 divides evenly by 5, so there's no remainder). A number is
+    \textbf{even} if \texttt{n \% 2 == 0}, and \textbf{odd} if \texttt{n \% 2 == 1}.
+    \item \texttt{**} is the \textbf{exponent} operator --- it means "raised to the power of."
+    For example, \texttt{2 ** 3} means $2^3$, which is \texttt{8}, and \texttt{5 ** 2} means
+    $5^2$, which is \texttt{25}.
+\end{itemize}
+
+\vspace{2mm}
+\hrule
+\vspace{2mm}
+
+% =========================================================
+\section{Conditionals}
+
+\vspace{4mm}
+\noindent\textbf{Problem 1}
+\begin{lstlisting}
+x = 7
+if x > 5:
+    print("big")
+else:
+    print("small")
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 2}
+\begin{lstlisting}
+temperature = 68
+
+if temperature > 80:
+    print("It's hot!")
+elif temperature > 60:
+    print("Nice day.")
+else:
+    print("Bring a jacket.")
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 3}
+\begin{lstlisting}
+grade = 72
+
+if grade >= 90:
+    print("A")
+elif grade >= 80:
+    print("B")
+elif grade >= 70:
+    print("C")
+else:
+    print("F")
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 4 (tricky!)}
+\begin{lstlisting}
+password = "wizard123"
+
+if password == "wizard123":
+    print("Access granted")
+if password == "Wizard123":
+    print("Access granted (capital W)")
+else:
+    print("Access denied (capital W)")
+\end{lstlisting}
+\answerbox
+
+% =========================================================
+\newpage
+\section{Loops}
+
+\noindent\textbf{A quick note on \texttt{break} and \texttt{continue}:}
+\vspace{2mm}
+
+\noindent Sometimes you want to change how a loop behaves \textit{while it's running}, instead of
+just letting it finish normally. Two keywords let you do that:
+
+\begin{itemize}[nosep]
+    \item \texttt{break} --- immediately \textbf{stops the loop completely}. The program jumps to
+    whatever comes after the loop, even if there were more values left to go through.
+    \item \texttt{continue} --- \textbf{skips the rest of the current pass} through the loop and
+    jumps straight to the next one. It does NOT stop the loop --- it just skips ahead.
+\end{itemize}
+
+\begin{lstlisting}
+for i in range(5):
+    if i == 3:
+        break
+    print(i)
+\end{lstlisting}
+\noindent This prints \texttt{0 1 2} and then stops --- once \texttt{i} hits \texttt{3}, the loop
+ends completely.
+
+\begin{lstlisting}
+for i in range(5):
+    if i == 3:
+        continue
+    print(i)
+\end{lstlisting}
+\noindent This prints \texttt{0 1 2 4} --- when \texttt{i} is \texttt{3}, that one pass is
+skipped, but the loop keeps going afterward.
+
+\vspace{4mm}
+\hrule
+\vspace{2mm}
+
+\vspace{4mm}
+\noindent\textbf{Problem 5}
+\begin{lstlisting}
+for i in range(5):
+    print(i)
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 6}
+\begin{lstlisting}
+count = 0
+while count < 3:
+    print("Hello!")
+    count = count + 1
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 7}
+\begin{lstlisting}
+total = 0
+for num in range(1, 5):
+    total = total + num
+print(total)
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 8 (break and continue)}
+\begin{lstlisting}
+for i in range(10):
+    if i == 3:
+        continue
+    if i == 6:
+        break
+    print(i)
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 9 (nested loop)}
+\begin{lstlisting}
+for i in range(3):
+    for j in range(2):
+        print(i, j)
+\end{lstlisting}
+\answerbox
+
+% =========================================================
+\newpage
+\section{Functions}
+
+\vspace{4mm}
+\noindent\textbf{Problem 10}
+\begin{lstlisting}
+def greet(name):
+    print("Hi, " + name + "!")
+
+greet("Maryam")
+greet("Amina")
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 11}
+\begin{lstlisting}
+def square(x):
+    return x * x
+
+result = square(4)
+print(result)
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 12 (return vs.\ print --- read carefully!)}
+\begin{lstlisting}
+def mystery(n):
+    if n % 2 == 0:
+        return "even"
+    else:
+        return "odd"
+
+print(mystery(7))
+print(mystery(10))
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 13 (default arguments)}
+\begin{lstlisting}
+def power(base, exponent=2):
+    return base ** exponent
+
+print(power(3))
+print(power(2, 3))
+\end{lstlisting}
+\answerbox
+
+% =========================================================
+\newpage
+\section{Combining Everything}
+
+\vspace{4mm}
+\noindent\textbf{Problem 14}
+\begin{lstlisting}
+def check_number(n):
+    if n < 0:
+        return "negative"
+    elif n == 0:
+        return "zero"
+    else:
+        return "positive"
+
+numbers = [-3, 0, 8, -1]
+for num in numbers:
+    print(check_number(num))
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 15}
+\begin{lstlisting}
+def countdown(n):
+    while n > 0:
+        print(n)
+        n = n - 1
+    print("Liftoff!")
+
+countdown(3)
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 16 (challenge: functions calling functions)}
+\begin{lstlisting}
+def double(x):
+    return x * 2
+
+def triple(x):
+    return x * 3
+
+def combo(x):
+    if x % 2 == 0:
+        return double(x)
+    else:
+        return triple(x)
+
+for i in range(1, 5):
+    print(combo(i))
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 17 (challenge: nested loop + conditional)}
+\begin{lstlisting}
+for i in range(1, 4):
+    for j in range(1, 4):
+        if (i + j) % 2 == 0:
+            print(str(i) + "+" + str(j) + " = even sum")
+\end{lstlisting}
+\answerbox
+
+\vspace{4mm}
+\noindent\textbf{Problem 18 (challenge: FizzBuzz)}
+\begin{lstlisting}
+for n in range(1, 16):
+    if n % 15 == 0:
+        print("FizzBuzz")
+    elif n % 3 == 0:
+        print("Fizz")
+    elif n % 5 == 0:
+        print("Buzz")
+    else:
+        print(n)
+\end{lstlisting}
+\answerbox
+
+\end{document}
